@@ -1,37 +1,22 @@
 import { useState } from "react";
 import "./App.css";
-import Form from "./Form";
 
-function App() {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	console.log("Component is rendering again");
+function Form() {
+	const [formInputs, setFormInputs] = useState({ name: "", email: "" });
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(name, email);
-		setName("");
-		setEmail("");
+		setFormInputs({ name: "", email: "" });
 	};
 
 	const handleChange = (e) => {
-		switch (e.target.name) {
-			case "name":
-				setName(e.target.value);
-				break;
-
-			case "email":
-				setEmail(e.target.value);
-				break;
-
-			default:
-				break;
-		}
+		setFormInputs({ ...formInputs, [e.target.name]: e.target.value });
 	};
 
 	return (
 		<div>
-			Form Handling With React
+			<p>----------------------------------------</p>
+			Form Handling With React Second Approach
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="name">Name : </label>
 				<input
@@ -39,7 +24,7 @@ function App() {
 					id="name"
 					name="name"
 					placeholder="Enter Your Name"
-					value={name}
+					value={formInputs.name}
 					onChange={handleChange}
 				/>
 				<br />
@@ -51,7 +36,7 @@ function App() {
 					id="email"
 					name="email"
 					placeholder="Enter Your Email"
-					value={email}
+					value={formInputs.email}
 					onChange={handleChange}
 				/>
 				<br />
@@ -59,9 +44,8 @@ function App() {
 
 				<input type="submit" value="Submit" />
 			</form>
-			<Form />
 		</div>
 	);
 }
 
-export default App;
+export default Form;
